@@ -1,0 +1,34 @@
+{
+    "name": "sypo/image",
+    "type": "project",
+    "description": "Placeholder image handling",
+    "homepage": "https://www.sypo.uk",
+    "license": "MIT",
+    "require": {
+		"aerocommerce/admin": "^0",
+		"spatie/valuestore": "1.2.*"
+	},
+    "authors": [
+        {
+            "name": "Andrew Tanner",
+            "email": "andrew@sypo.uk",
+            "homepage": "http://www.sypo.uk",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Sypo\\Image\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Sypo\\Image\\Providers\\ServiceProvider"
+            ]
+        }
+    }
+}

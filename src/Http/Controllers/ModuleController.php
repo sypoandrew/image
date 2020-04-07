@@ -1,0 +1,69 @@
+<?php
+
+namespace Sypo\Image\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Aero\Admin\Facades\Admin;
+use Aero\Admin\Http\Controllers\Controller;
+
+class ModuleController extends Controller
+{
+    protected $data = []; // the information we send to the view
+
+    /**
+     * Show main settings form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        return view('image::image', $this->data);
+    }
+    
+	/**
+     * Update settings
+     *
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request)
+    {
+		$imageName = time().'.'.$request->file->getClientOriginalExtension();
+		$imageName = $request->file->getClientOriginalExtension();
+        $request->file->move(storage_path('app/image_library'), $imageName);
+         
+    	return response()->json(['success'=>'You have successfully upload file.']);
+		
+		
+		/* $res = ['success'=>false,'data'=>false,'error'=>[]];
+		
+        $validator = \Validator::make($request->all(), [
+            'stock_threshold' => 'required|int',
+            'price_threshold' => 'required|int',
+            'margin_markup' => 'required|int',
+        ]);
+		
+		if($validator->fails()){
+			$res['error'] = $validator->errors()->all();
+			return response()->json($res);
+		}
+		
+		$formdata = $request->json()->all();
+		Log::debug($formdata);
+		
+		
+        return redirect()->back()->with('message', 'Settings updated.'); */
+    }
+    
+	/**
+     * Manually run the Placeholder image
+     *
+     * @return void
+     */
+    public function placeholder_image(Request $request)
+    {
+    	\Artisan::call('sypo:image:process');
+		
+		return redirect()->back()->with('message', 'You have successfully run the Placeholder image routine.');
+    }
+}
