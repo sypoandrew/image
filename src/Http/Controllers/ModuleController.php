@@ -3,7 +3,6 @@
 namespace Sypo\Image\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Aero\Admin\Facades\Admin;
 use Aero\Admin\Http\Controllers\Controller;
 
@@ -28,31 +27,13 @@ class ModuleController extends Controller
      */
     public function update(Request $request)
     {
+		return redirect()->back()->with('message', 'Successfully uploaded image');
+		
 		$imageName = time().'.'.$request->file->getClientOriginalExtension();
 		$imageName = $request->file->getClientOriginalExtension();
         $request->file->move(storage_path('app/image_library'), $imageName);
          
     	return response()->json(['success'=>'You have successfully upload file.']);
-		
-		
-		/* $res = ['success'=>false,'data'=>false,'error'=>[]];
-		
-        $validator = \Validator::make($request->all(), [
-            'stock_threshold' => 'required|int',
-            'price_threshold' => 'required|int',
-            'margin_markup' => 'required|int',
-        ]);
-		
-		if($validator->fails()){
-			$res['error'] = $validator->errors()->all();
-			return response()->json($res);
-		}
-		
-		$formdata = $request->json()->all();
-		Log::debug($formdata);
-		
-		
-        return redirect()->back()->with('message', 'Settings updated.'); */
     }
     
 	/**
@@ -62,8 +43,30 @@ class ModuleController extends Controller
      */
     public function placeholder_image(Request $request)
     {
-    	\Artisan::call('sypo:image:process');
+    	\Artisan::call('sypo:image:placeholder');
 		
-		return redirect()->back()->with('message', 'You have successfully run the Placeholder image routine.');
+		return redirect()->back()->with('message', 'Successfully run the placeholder image routine');
+    }
+    
+	/**
+     * Manually run the Replace default image routine
+     *
+     * @return void
+     */
+    public function replace_default_image(Request $request)
+    {
+    	\Artisan::call('sypo:image:update');
+		
+		return redirect()->back()->with('message', 'Successfully run the replace default image routine');
+    }
+    
+	/**
+     * Download the image report file
+     *
+     * @return void
+     */
+    public function download_image_report(Request $request)
+    {
+        return response()->download(storage_path('app/'. $request->input('filename')));
     }
 }

@@ -1,7 +1,7 @@
 {
     "name": "sypo/image",
     "type": "project",
-    "description": "Placeholder image handling",
+    "description": "Aero Commerce product image processing",
     "homepage": "https://www.sypo.uk",
     "license": "MIT",
     "require": {
