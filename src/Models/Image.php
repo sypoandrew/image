@@ -6,6 +6,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use Aero\Catalog\Models\Product;
+use Aero\Catalog\Models\TagGroup;
 use Aero\Common\Models\Image as AeroImage;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 use Sypo\Image\Models\EmailNotification;
