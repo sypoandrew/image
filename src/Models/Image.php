@@ -18,7 +18,8 @@ class Image
     protected $library_files;
     protected $tag_groups;
     protected $handle_default_fallback = true;
-    protected $clear_previous_image = false;
+    #delete all current images
+	protected $clear_previous_image = false;
     protected $email_code;
     protected $image_report_rows;
 
@@ -36,6 +37,29 @@ class Image
 		}
 		$this->tag_groups = self::get_tag_groups();
 	}
+    
+    /**
+     * Set handle_default_fallback indicator to use fallback default bottle image if no library image present
+     *
+     * @param bool $handle_default_fallback
+     * @return void
+     */
+    public function set_handle_default_fallback(bool $handle_default_fallback)
+    {
+        $this->handle_default_fallback = $handle_default_fallback;
+    }
+    
+	/**
+     * Set clear_previous_image indicator to delete all current images
+     *
+     * @param bool $clear_previous_image
+     * @return void
+     */
+    public function set_clear_previous_image(bool $clear_previous_image)
+    {
+		$this->clear_previous_image = $clear_previous_image;
+    }
+    
     /**
      * Get all required tag groups for image handling
      *
@@ -64,29 +88,15 @@ class Image
 		
 		#check if we have one in the library
 		# - first check LWIN7 with space
-		$lwin7 = substr(str_replace('LX', '', $product->model), 0, 7);
-		$lwin7_found = false;
+		$lwin7 = substr($product->model, 2, 7);
+		#dd($lwin7);
 		foreach($this->library_files as $filename){
 			if(substr($filename, 0, 8) == $lwin7 . ' '){
-				$lwin7_found = true;
 				$image_name = $filename;
 				break;
 			}
 		}
-		
-		# - second check LWIN6 with space
-		if(!$lwin7_found){
-			$lwin6 = substr(str_replace('LX', '', $product->model), 0, 6);
-			$lwin6_found = false;
-			
-			foreach($this->library_files as $filename){
-				if(substr($filename, 0, 7) == $lwin6 . ' '){
-					$lwin6_found = true;
-					$image_name = $filename;
-					break;
-				}
-			}
-		}
+		#dd($image_name);
 		
 		if($image_name){
 			$image_src = storage_path('app/image_library/library/'.$image_name);
@@ -136,12 +146,14 @@ class Image
 				#Log::warning($product->model.' unable to create from default image - '.$wine_type.' | '.$colour);
 			}
 		}
+		#dd($image_src);
 		
 		if($image_src !== null){
 			
 			#delete the current placeholder
 			if(!$this->handle_default_fallback and $this->clear_previous_image){
 				$product->allImages()->delete();
+                #dd($product->allImages()->count());
 			}
 			
 			$this->createOrUpdateImage($product, $image_src);
