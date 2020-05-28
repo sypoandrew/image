@@ -19,7 +19,7 @@ class UpdateDefaultImage extends Command
      *
      * @var string
      */
-    protected $description = 'Update default placeholder images for products with library';
+    protected $description = 'Update default placeholder images with library image';
 
     /**
      * Create a new command instance.

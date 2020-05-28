@@ -19,7 +19,7 @@ class PlaceholderImage extends Command
      *
      * @var string
      */
-    protected $description = 'Create placeholder images for products';
+    protected $description = 'Process items without an image, use library image or default to placeholder image';
 
     /**
      * Create a new command instance.
