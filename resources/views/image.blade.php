@@ -40,7 +40,7 @@
 			</div>
 			<div class="mt-4 w-full">
 			<label for="image_report_send_to_email" class="block">Image report send to email</label>
-			<input type="image_report_send_from_email" id="image_report_send_to_email" name="image_report_send_to_email" autocomplete="off" required="required" class="w-full " value="{{ setting('Image.image_report_send_to_email') }}">
+			<input type="text" id="image_report_send_to_email" name="image_report_send_to_email" autocomplete="off" required="required" class="w-full " value="{{ setting('Image.image_report_send_to_email') }}">
 			</div>
 			<div class="mt-4 w-full">
 			<label for="image_report_send_from_email" class="block">Image report send from email</label>
