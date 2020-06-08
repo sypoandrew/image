@@ -32,7 +32,7 @@ class ServiceProvider extends ModuleServiceProvider
 		
         Settings::group('Image', function (SettingGroup $group) {
             $group->boolean('enabled')->default(true);
-            $group->string('image_report_send_email')->default(true);
+            $group->boolean('image_report_send_email')->default(true);
             $group->string('image_report_send_to_email')->default('andrew@sypo.uk');
             $group->string('image_report_send_from_email')->default('sales@vinquinn.com');
             $group->string('image_report_send_from_name')->default('VinQuinn Sales');
