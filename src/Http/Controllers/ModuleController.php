@@ -41,7 +41,7 @@ class ModuleController extends Controller
 			
 			$valuestore = Valuestore::make(storage_path('app/settings/Image.json'));
 			$valuestore->put('enabled', (int) $request->input('enabled'));
-			$valuestore->put('image_report_send_email', $request->input('image_report_send_email'));
+			$valuestore->put('image_report_send_email', (int) $request->input('image_report_send_email'));
 			$valuestore->put('image_report_send_to_email', $request->input('image_report_send_to_email'));
 			$valuestore->put('image_report_send_from_email', $request->input('image_report_send_from_email'));
 			$valuestore->put('image_report_send_from_name', $request->input('image_report_send_from_name'));
