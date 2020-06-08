@@ -27,15 +27,27 @@
 			</label>
 			</div>
 			<div class="mt-4 w-full">
-			<label for="enabled" class="block">Image report send to email</label>
-			<input type="text" id="image_report_send_to_email" name="image_report_send_to_email" autocomplete="off" required="required" class="w-full " value="{{ setting('Image.image_report_send_to_email') }}">
+			<label for="image_report_send_email" class="block">
+			<label class="checkbox">
+			@if(setting('Image.image_report_send_email'))
+			<input type="checkbox" id="image_report_send_email" name="image_report_send_email" checked="checked" value="1">
+			@else
+			<input type="checkbox" id="image_report_send_email" name="image_report_send_email" value="1">
+			@endif
+			<span></span>
+			</label>Image report send email
+			</label>
 			</div>
 			<div class="mt-4 w-full">
-			<label for="enabled" class="block">Image report send from email</label>
+			<label for="image_report_send_to_email" class="block">Image report send to email</label>
+			<input type="image_report_send_from_email" id="image_report_send_to_email" name="image_report_send_to_email" autocomplete="off" required="required" class="w-full " value="{{ setting('Image.image_report_send_to_email') }}">
+			</div>
+			<div class="mt-4 w-full">
+			<label for="image_report_send_from_email" class="block">Image report send from email</label>
 			<input type="text" id="image_report_send_from_email" name="image_report_send_from_email" autocomplete="off" required="required" class="w-full " value="{{ setting('Image.image_report_send_from_email') }}">
 			</div>
 			<div class="mt-4 w-full">
-			<label for="enabled" class="block">Image report send from name</label>
+			<label for="image_report_send_from_name" class="block">Image report send from name</label>
 			<input type="text" id="image_report_send_from_name" name="image_report_send_from_name" autocomplete="off" required="required" class="w-full " value="{{ setting('Image.image_report_send_from_name') }}">
 			</div>
 		</div>
