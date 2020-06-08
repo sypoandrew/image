@@ -307,7 +307,7 @@ class Image
 		return $products;
 	}
 	
-	public function send_email_report(){
+	public function create_report(){
 		$products = false;
 		if($this->handle_default_fallback){
 			$this->email_code = 'missing_image_report';
@@ -322,12 +322,14 @@ class Image
 		$this->image_report_rows = $products->toArray();
 		$this->saveCsv();
 		
-		#only send the email notification once a day
-		$report_sent = EmailNotification::where('code', $this->email_code)->whereDate('created_at', \Carbon\Carbon::today())->count();
-		if(!$report_sent){
-			if($products){
-				$email = new ImageReportMail($products, $this->email_code);
-				Mail::send($email);
+		if(setting('Image.image_report_send_email')){
+			#only send the email notification once a day
+			$report_sent = EmailNotification::where('code', $this->email_code)->whereDate('created_at', \Carbon\Carbon::today())->count();
+			if(!$report_sent){
+				if($products){
+					$email = new ImageReportMail($products, $this->email_code);
+					Mail::send($email);
+				}
 			}
 		}
 	}

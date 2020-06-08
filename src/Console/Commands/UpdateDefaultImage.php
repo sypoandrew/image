@@ -49,7 +49,7 @@ class UpdateDefaultImage extends Command
 			$progressBar->advance();
 		}
 		
-		$l->send_email_report();
+		$l->create_report();
 		
 		$progressBar->finish();
     }
