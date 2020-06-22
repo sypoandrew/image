@@ -5,5 +5,5 @@ Hello,<br>
 <p>Please log into the admin to download the report from the Modules area.</p>
 <br><br>
 Thanks,<br>
-{{ env('APP_NAME') }}
+{{ config('app.name') }}
 @endcomponent
